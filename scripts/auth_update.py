@@ -4,7 +4,7 @@ from azure.identity import AzureDeveloperCliCredential
 import urllib3
 
 
-def update_redirect_uris(credential, app_id, uri):
+def update_redirect_uris(credential, app_id, uri, timeout=10):
     urllib3.request(
         "PATCH",
         f"https://graph.microsoft.com/v1.0/applications/{app_id}",
@@ -20,6 +20,7 @@ def update_redirect_uris(credential, app_id, uri):
                 ]
             }
         },
+        timeout=urllib3.Timeout(connect=timeout, read=timeout),
     )
 
 

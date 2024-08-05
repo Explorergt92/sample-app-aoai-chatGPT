@@ -1,6 +1,6 @@
 name: conda_env
 dependencies:
-  - python=3.10.9
+  - python=3.11.9
   - pip
   - pip:
     - azureml-core
