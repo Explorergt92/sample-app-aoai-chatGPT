@@ -21,10 +21,10 @@
                 "S1",
                 "S2",
                 "S3",
-                "P1",
-                "P2",
-                "P3",
-                "P4"
+                "P0V3",
+                "P1V3",
+                "P2V3",
+                "P3V3"
             ],
             "metadata": {
                 "description": "The pricing tier for the App Service plan"
@@ -42,90 +42,6 @@
             "defaultValue": "[guid(resourceGroup().id)]",
             "metadata": {
                 "description": "Name of Application Insights"
-            }
-        },
-        "AzureSearchService": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Name of Azure Search Service"
-            }
-        },
-        "AzureSearchIndex": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Name of Azure Search Index"
-            }
-        },
-        "AzureSearchKey": {
-            "type": "securestring",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Azure Search Admin Key"
-            }
-        },
-        "AzureSearchUseSemanticSearch": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "Use semantic search"
-            }
-        },
-        "AzureSearchSemanticSearchConfig": {
-            "type": "string",
-            "defaultValue": "default",
-            "metadata": {
-                "description": "Semantic search config"
-            }
-        },
-        "AzureSearchIndexIsPrechunked": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "Is the index prechunked"
-            }
-        },
-        "AzureSearchTopK": {
-            "type": "int",
-            "defaultValue": 5,
-            "metadata": {
-                "description": "Top K results"
-            }
-        },
-        "AzureSearchEnableInDomain": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "Enable in domain"
-            }
-        },
-        "AzureSearchContentColumns": {
-            "type": "string",
-            "defaultValue": "content",
-            "metadata": {
-                "description": "Content columns"
-            }
-        },
-        "AzureSearchFilenameColumn": {
-            "type": "string",
-            "defaultValue": "filename",
-            "metadata": {
-                "description": "Filename column"
-            }
-        },
-        "AzureSearchTitleColumn": {
-            "type": "string",
-            "defaultValue": "title",
-            "metadata": {
-                "description": "Title column"
-            }
-        },
-        "AzureSearchUrlColumn": {
-            "type": "string",
-            "defaultValue": "url",
-            "metadata": {
-                "description": "Url column"
             }
         },
         "AzureOpenAIResource": {
@@ -193,48 +109,6 @@
             "defaultValue": true,
             "metadata": {
                 "description": "Whether or not to stream responses from Azure OpenAI"
-            }
-        },
-        "AzureSearchQueryType": {
-            "type": "string",
-            "defaultValue": "simple",
-            "allowedValues": [
-                "simple",
-                "semantic",
-                "vector",
-                "vectorSimpleHybrid",
-                "vectorSemanticHybrid"
-            ],
-            "metadata": {
-                "description": "Azure Search Query Type"
-            }
-        },
-        "AzureSearchVectorFields": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Azure Search Vector Fields"
-            }
-        },
-        "AzureSearchPermittedGroupsField": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Azure Search Permitted Groups Field"
-            }
-        },
-        "AzureSearchStrictness": {
-            "type": "int",
-            "defaultValue": 3,
-            "allowedValues": [
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "metadata": {
-                "description": "Azure Search Strictness"
             }
         },
         "AzureOpenAIEmbeddingName": {
@@ -355,7 +229,7 @@
         "cosmosdb_account_name": "[format('db-{0}', parameters('WebsiteName'))]",
         "cosmosdb_database_name": "db_conversation_history",
         "cosmosdb_container_name": "conversations",
-        "roleDefinitionId": "00000000-0000-0000-0000-000000000002", // Cosmos DB Built-in Data Contributor Role
+        "roleDefinitionId": "00000000-0000-0000-0000-000000000002",
         "roleAssignmentId": "[guid(variables('roleDefinitionId'), parameters('WebsiteName'), resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmosdb_account_name')))]"
     },
     "resources": [
@@ -391,54 +265,6 @@
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
                             "value": "[reference(resourceId('Microsoft.Insights/components', parameters('ApplicationInsightsName')), '2015-05-01').InstrumentationKey]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_SERVICE",
-                            "value": "[parameters('AzureSearchService')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_INDEX",
-                            "value": "[parameters('AzureSearchIndex')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_KEY",
-                            "value": "[parameters('AzureSearchKey')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_USE_SEMANTIC_SEARCH",
-                            "value": "[parameters('AzureSearchUseSemanticSearch')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG",
-                            "value": "[parameters('AzureSearchSemanticSearchConfig')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_INDEX_IS_PRECHUNKED",
-                            "value": "[parameters('AzureSearchIndexIsPrechunked')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_TOP_K",
-                            "value": "[parameters('AzureSearchTopK')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_ENABLE_IN_DOMAIN",
-                            "value": "[parameters('AzureSearchEnableInDomain')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_CONTENT_COLUMNS",
-                            "value": "[parameters('AzureSearchContentColumns')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_FILENAME_COLUMN",
-                            "value": "[parameters('AzureSearchFilenameColumn')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_TITLE_COLUMN",
-                            "value": "[parameters('AzureSearchTitleColumn')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_URL_COLUMN",
-                            "value": "[parameters('AzureSearchUrlColumn')]"
                         },
                         {
                             "name": "AZURE_OPENAI_RESOURCE",
@@ -479,22 +305,6 @@
                         {
                             "name": "AZURE_OPENAI_STREAM",
                             "value": "[parameters('AzureOpenAIStream')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_QUERY_TYPE",
-                            "value": "[parameters('AzureSearchQueryType')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_VECTOR_COLUMNS",
-                            "value": "[parameters('AzureSearchVectorFields')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_PERMITTED_GROUPS_COLUMN",
-                            "value": "[parameters('AzureSearchPermittedGroupsField')]"
-                        },
-                        {
-                            "name": "AZURE_SEARCH_STRICTNESS",
-                            "value": "[parameters('AzureSearchStrictness')]"
                         },
                         {
                             "name": "AZURE_OPENAI_EMBEDDING_NAME",

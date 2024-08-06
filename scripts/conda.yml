@@ -6,7 +6,6 @@ dependencies:
     - azureml-core
     - azure-identity
     - azure-keyvault-secrets
-    - azure-ai-formrecognizer
     - markdown
     - requests
     - tqdm
@@ -15,7 +14,6 @@ dependencies:
     - bs4
     - urllib3
     - openai
-    - azure-search-documents
     - azure-storage-blob
     - chardet
 
